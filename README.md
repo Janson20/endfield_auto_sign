@@ -1,15 +1,29 @@
-# skyland_auto_sign_qinglong
+# endfield-auto-sign终末地森空岛自动签到
 
-适用于青龙面板的森空岛签到脚本
+***适用于青龙面板的终末地森空岛签到脚本***
 
-原项目: ~~https://github.com/xxyz30/skyland-auto-sign~~
+![Python](https://img.shields.io/badge/Python-3.7+-blue?logo=python&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-青龙面板-blue?logo=linux)
+![Game](https://img.shields.io/badge/Game-终末地-orange?logo=arknights)
+![Last Commit](https://img.shields.io/github/last-commit/sjtt2/endfield_auto_signin)
 
-https://gitee.com/FancyCabbage/skyland-auto-sign
+
+此脚本在原项目的基础上：
+>
+>修改成适配终末地的签到接口
+>
+>优化了签到结果的格式化打印
+>
+
+**原项目**: https://github.com/Zerolouis/skyland_auto_sign_qinglong
+
+**原项目的原项目**：https://gitee.com/FancyCabbage/skyland-auto-sign
+`(这个项目1.4起版本已支持终末地)`
 
 
 ## 使用
 
-1. 添加环境变量
+1. 添加环境变量  *（支持多用户）*
 
    名称: `SKYLAND_TOKEN`
 
@@ -17,9 +31,10 @@ https://gitee.com/FancyCabbage/skyland-auto-sign
 
    记得添加`;`
 
+
 2. 青龙面板添加订阅
 
-   地址: `https://github.com/Zerolouis/skyland_auto_sign_qinglong.git`
+   地址: `https://github.com/sjtt2/endfield_auto_sign.git`
 
    推荐定时: `0 0 23 1 * *`
 
@@ -74,7 +89,7 @@ https://gitee.com/FancyCabbage/skyland-auto-sign
 
    仅测试了TG，其他推送方式若有问题请反馈
 
-2. 在青龙面板`配置管理`中填入相对应的推送API的环境变量即可
+2. 在青龙面板`配置文件`中的`config.sh`中填入相对应的推送API的环境变量即可
 
 
 ## 其他
