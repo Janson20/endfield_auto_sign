@@ -5,7 +5,7 @@ File: auto_sign.py(终末地签到)
 Author: sjtt2
 cron: 0 30 8 * * *
 new Env('终末地签到');
-Update: 2026/2/12
+Update: 2026/2/15
 """
 import hashlib
 import hmac
@@ -16,7 +16,7 @@ from urllib import parse
 import requests
 import notify
 
-# 全局配置
+# 初始化变量
 skyland_tokens = os.getenv('SKYLAND_TOKEN') or ''
 skyland_notify = os.getenv('SKYLAND_NOTIFY') or ''
 run_message: str = ''
@@ -50,21 +50,12 @@ SIGN_HEADER_TPL = {
 }
 
 def send_notify(title, content):
-    if not skyland_notify:
+    """
+    消息推送，使用青龙推送脚本
+    """
+    if not skyland_notify or skyland_notify.strip().lower() == 'false':
         return
-    nt = skyland_notify.strip()
-    if nt == 'TG':
-        notify.telegram_bot(title, content)
-    elif nt == 'BARK':
-        notify.bark(title, content)
-    elif nt == 'PUSHPLUS':
-        notify.pushplus_bot(title, content)
-    elif nt == 'SERVERJ':
-        notify.serverJ(title, content)
-    elif nt == 'QYWXBOT':
-        notify.wecom_bot(title, content)
-    elif nt == 'DD':
-        notify.dingding_bot(title, content)
+    notify.send(title, content)
 
 def generate_sign(token, path, body):
     """生成接口签名"""

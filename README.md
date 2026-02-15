@@ -65,34 +65,68 @@
    data.content即为token
 
 ## 通知(可选)
-
-1. 添加环境变量
+适配了青龙面板的多平台推送
+1. **在青龙面板添加环境变量**
    
    名称: `SKYLAND_NOTIFY`
 
-   值如下表
-
-   | 值        | 说明       |
-   | -------- | -------- |
-   | TG       | Telegram |
-   | BARK     | bark     |
-   | DD       | 钉钉机器人    |
-   | FSKEY    | 飞书机器人    |
-   | GOBOT    |  QQ机器人        |
-   | IGOT     |   iGot 聚合推送       |
-   | SERVERJ  |    server 酱      |
-   | PUSHDEER |    PushDeer      |
-   | PUSHPLUS |    push+ 微信推送      |
-   | QMSG     |   qmsg 酱       |
-   | QYWXAPP  |   企业微信应用       |
-   | QYWXBOT  |  企业微信机器人        |
-
-   仅测试了TG，其他推送方式若有问题请反馈
-
-2. 在青龙面板`配置文件`中的`config.sh`中填入相对应的推送API的环境变量即可
+   值:`true`(设置为`false`或不添加此变量则不推送)
 
 
-## 其他
+2. **配置推送渠道**
 
-1. 需要requests包，若报错则在 `依赖管理-python3`，添加`requests`依赖
+   在青龙面板`配置文件`中的`config.sh`中填入相对应的推送API的环境变量即可
+
+### 支持的推送方式
+以下内容在`config.sh`中配置，不需要自己创建环境变量
+
+| 推送方式 | 需要配置的核心环境变量 |
+| :--- | :--- |
+| **Server 酱** | `PUSH_KEY` |
+| **Bark (iOS)** | `BARK_PUSH` |
+| **Telegram** | `TG_BOT_TOKEN`, `TG_USER_ID` |
+| **钉钉机器人** | `DD_BOT_TOKEN`, `DD_BOT_SECRET` |
+| **企业微信机器人** | `QYWX_KEY` |
+| **企业微信应用** | `QYWX_AM` |
+| **iGot 聚合** | `IGOT_PUSH_KEY` |
+| **Push Plus** | `PUSH_PLUS_TOKEN` |
+| **微加机器人** | `WE_PLUS_BOT_TOKEN` |
+| **go-cqhttp** | `GOBOT_URL`, `GOBOT_TOKEN` |
+| **Gotify** | `GOTIFY_URL`, `GOTIFY_TOKEN` |
+| **PushDeer** | `DEER_KEY` |
+| **Synology Chat** | `CHAT_URL`, `CHAT_TOKEN` |
+| **智能微秘书** | `AIBOTK_KEY` |
+| **CHRONOCAT** | `CHRONOCAT_URL`, `CHRONOCAT_TOKEN` |
+| **SMTP 邮件** | `SMTP_SERVER`, `SMTP_EMAIL`, `SMTP_PASSWORD` |
+| **PushMe** | `PUSHME_KEY` |
+| **飞书机器人** | `FSKEY` |
+| **Qmsg 酱** | `QMSG_KEY` |
+| **Ntfy** | `NTFY_TOPIC`, `NTFY_URL` |
+| **wxPusher** | `WXPUSHER_APP_TOKEN`, `WXPUSHER_UIDS` |
+| **自定义 Webhook** | `WEBHOOK_URL`, `WEBHOOK_METHOD` |
+
+仅测试了`钉钉`的推送，如有问题请反馈
+
+> [!TIP]
+> 详细的变量名称和渠道支持，请直接参考 `config.sh` 
+
+---
+
+## 其他说明
+
+1. **依赖安装**
    
+   本脚本运行需要 `requests` 库。若运行报错，请在青龙面板进行如下操作：
+   1. 进入 `依赖管理` -> `Python3`。
+   2. 点击 `创建依赖`。
+   3. 输入 `requests` 并点击保存。
+
+2. **多账号支持**
+   
+   如果需要配置多个账号，请在 `SKYLAND_TOKEN` 环境变量中使用英文分号 `;` 分隔，例如：`token1;token2;token3`
+
+3. **自定义消息 (Webhook)**
+   
+   如果你使用自定义 Webhook，可以在 URL 或 Body 中使用以下占位符：
+   - `$title`: 邮件/消息标题（如：终末地每日签到结果）。
+   - `$content`: 详细的签到状态汇总。
